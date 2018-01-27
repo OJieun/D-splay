@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Display">
+
+ 	<typeAlias alias="info" type="display.model.main.PerformInfoVO"/>
+	
+	<insert id="insertHit" parameterClass="info">
+		INSERT INTO hit(
+			seq, thumbnail, title, hits, endDate
+		)VALUES(
+			#seq#, #thumbnail#, #title#, 1, #endDate#
+		)
+	</insert>
+
+	<select id="getHitInfo" resultClass="info" parameterClass="int">
+		SELECT * FROM hit WHERE seq = #seq#
+	</select>
+	
+	<update id="updateHit" parameterClass="int">
+		UPDATE hit SET hits=hits+1 WHERE seq=#seq#
+	</update>
+	
+</sqlMap>
